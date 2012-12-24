@@ -27,6 +27,9 @@ struct Level
   sections_t ordered_sections;
   Level* parent;
   size_t depth;
+
+  const std::string& operator[](const std::string& name) { return values[name]; }
+  Level& operator()(const std::string& name) { return sections[name]; }
 };
 
 class Parser
