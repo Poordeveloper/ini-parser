@@ -1,7 +1,7 @@
-ini_parser
+.ini parser
 ==========
 
-Parser in C++ for parsing ini configuration files. All in one header file and support multiple
+An .ini parser in C++ for parsing ini configuration files. All in one header file and support multiple
 levels.
 
 example:
