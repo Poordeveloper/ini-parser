@@ -40,3 +40,6 @@ void test1()
 
 Please check INI::Parser::dump function for iteration in original order.
 
+## License
+
+Distributed under the [MIT](https://tldrlegal.com/license/mit-license) license.
