@@ -131,8 +131,8 @@ Parser::parse(Level& l)
       if (n == std::string::npos)
         err("no '=' found");
       std::pair<Level::value_map_t::const_iterator, bool> res = 
-        l.values.insert(std::make_pair(line_.substr(0, n), 
-              line_.substr(n+1, line_.length()-n-1)));
+        l.values.insert(std::make_pair(trim(line_.substr(0, n)), 
+              trim(line_.substr(n+1, line_.length()-n-1))));
       if (!res.second)
         err("duplicated key found");
       l.ordered_values.push_back(res.first);
