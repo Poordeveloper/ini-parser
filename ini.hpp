@@ -77,7 +77,7 @@ inline std::string trim(const std::string& s)
 inline 
 Parser::Parser(const char* fn) : f0_(fn), f_(&f0_), ln_(0)
 { 
-  if (!f_) 
+  if (!f0_) 
     throw std::runtime_error(std::string("failed to open file: ") + fn);
 
   parse(top_); 
