@@ -99,6 +99,23 @@ inline std::string trim(const std::string& s)
 }
 
 inline 
+std::string value(const std::string& s)
+{
+    std::string c = "#;";
+    std::string v = s;
+    size_t ep = std::string::npos;
+    for(size_t i = 0; i < c.size(); i++)
+    {
+        ep = s.find(c[i]);
+        if(ep != std::string::npos)
+            break;
+    }
+    if(ep != std::string::npos)
+        v=s.substr(0, ep);
+    return v;
+}
+
+inline 
 Parser::Parser(const char* fn) : f0_(fn), f_(&f0_), ln_(0)
 { 
   if (!f0_) 
@@ -154,9 +171,10 @@ Parser::parse(Level& l)
       size_t n = line_.find('=');
       if (n == std::string::npos)
         err("no '=' found");
+      std::string v = value(trim(line_.substr(n+1, line_.length()-n-1)));
       std::pair<Level::value_map_t::const_iterator, bool> res = 
         l.values.insert(std::make_pair(trim(line_.substr(0, n)), 
-              trim(line_.substr(n+1, line_.length()-n-1))));
+              v));
       if (!res.second)
         err("duplicated key found");
       l.ordered_values.push_back(res.first);
