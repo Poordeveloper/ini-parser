@@ -33,6 +33,7 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 namespace INI {
 
@@ -81,9 +82,9 @@ private:
 inline void
 Parser::err(const char* s)
 {
-  char buf[256];
-  sprintf(buf, "%s on line #%ld", s, ln_);
-  throw std::runtime_error(buf);
+  std::ostringstream os;
+  os << s << " on line #" << ln_;
+  throw std::runtime_error(os.str());
 }
 
 inline std::string trim(const std::string& s)
