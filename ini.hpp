@@ -139,7 +139,19 @@ inline void
 Parser::parse(Level& l)
 {
   while (std::getline(*f_, line_)) {
-    ++ln_;
+    //to skip BOM
+    if (ln_++ == 0 && line_.size() > 3) {
+      if (static_cast<unsigned char>(line_[0]) == 0xEF &&
+        static_cast<unsigned char>(line_[1]) == 0xBB &&
+        static_cast<unsigned char>(line_[2]) == 0xBF)
+      {
+        for (int i = 0; i < 3; i++)
+        {
+          line_.erase(line_.begin());
+        }
+      }
+    }
+    
     if (line_[0] == '#' || line_[0] == ';') continue;
     line_ = trim(line_);
     if (line_.empty()) continue;
